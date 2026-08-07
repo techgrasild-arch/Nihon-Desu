@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nihon-Desu</title>
+    <link rel="stylesheet" href="CSS/keranjang.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <nav>
+      <div class="menu">
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/Nihon-Desu.png" alt="Logo" />
+          </a>
+          <ul>
+            <li>
+              <a href="#">Category</a>
+              <ul class="dropdown">
+                <li><a href="#">Nendoroid</a></li>
+                <li><a href="ScaledFigure.html">Scaled Figure</a></li>
+                <li><a href="PriceFigure.html">Prize Figure</a></li>
+                <li><a href="PopUpParade.html">Pop up parade</a></li>
+                <li><a href="ModelKit.html">Model Kit</a></li>
+                <li><a href="Figma.html">Figma</a></li>
+                <li><a href="Marchindise.html">Merchandise</a></li>
+                <li><a href="LightNovel.html">Light novel</a></li>
+                <li><a href="Manga.html">Manga</a></li>
+                <li><a href="Cosplay.html">Cosplayer items</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="search">
+          <input type="text" placeholder="search..." />
+          <button class="search-button">search</button>
+        </div>
+        <ul class="right-menu">
+          <img class="basket" src="images/basket-shopping-solid.svg" alt="Keranjang" />
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header END -->
+
+
+  <!-- Keranjang -->
+  <div class="cart">
+    <h2>Keranjang Anda</h2>
+    <div id="cart-items">
+      <!-- Produk yang ditambahkan akan muncul di sini -->
+    </div>
+    <div class="total">
+      <p>Total: Rp <span id="total-price">0</span></p>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </div>
+
+ 
+
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="F-container">
+        <div class="F-Column">
+          <h3>Nihon-Desu</h3>
+          <ul>
+            <li><a href="#">Tentang Nihon-Desu</a></li>
+            <li><a href="#">Pembuat</a></li>
+          </ul>
+        </div>
+        <div class="F-Column">
+          <h3>Bantuan dan Panduan</h3>
+          <ul>
+            <li><a href="#">Nihon-Desu Care</a></li>
+            <li><a href="#">Syarat dan Ketentuan</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+          </ul>
+          <h3>Ikuti Kami</h3>
+          <div class="social_icons">
+            <a href="#"><img src="images/Facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="images/Instagram.jpg" alt="Instagram" /></a>
+          </div>
+        </div>
+
+        <div class="F-Column">
+          <img src="path-to-mascot-image.png" alt="Mascot" class="footer_image" />
+          <p>&copy; 2024–2025, Nihon-Desu</p>
+        </div>
+      </div>
+    </footer>
+    <!-- End footer -->
+
+    <script>
+   // Fungsi untuk menambahkan produk ke dalam keranjang
+function addToCart(productName, productPrice, productImage) {
+    // Menambahkan produk ke dalam localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Membuat objek produk
+    const product = {
+        name: productName,
+        price: productPrice,
+        image: productImage,
+        checked: false // Default status checklist
+    };
+    
+    // Menambahkan produk ke dalam array cart
+    cart.push(product);
+    
+    // Menyimpan kembali cart ke dalam localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Menampilkan notifikasi
+    alert(`Produk "${productName}" berhasil ditambahkan ke keranjang!`);
+    
+    // Update halaman keranjang
+    updateCart();
+}
+
+// Fungsi untuk mengupdate tampilan keranjang
+function updateCart() {
+    const cartContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    
+    // Mengambil data cart dari localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Kosongkan keranjang sebelumnya
+    cartContainer.innerHTML = '';
+    
+    let totalPrice = 0;
+    
+    // Looping untuk menampilkan produk di keranjang
+    cart.forEach((item, index) => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.classList.add('cart-item');
+        cartItemElement.innerHTML = `
+            <input type="checkbox" class="cart-item-check" data-index="${index}" ${item.checked ? 'checked' : ''} />
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image" />
+            <p class="cart-item-name">${item.name}</p>
+            <p class="cart-item-price">Rp ${item.price.toLocaleString()}</p>
+            <button class="cart-item-remove" onclick="removeFromCart(${index})">Hapus</button>
+        `;
+        
+        // Menambahkan event listener untuk checkbox
+        cartItemElement.querySelector('.cart-item-check').addEventListener('change', function() {
+            toggleItemChecked(index, this.checked);
+        });
+        
+        cartContainer.appendChild(cartItemElement);
+        
+        // Tambahkan ke total jika dichecklist
+        if (item.checked) {
+            totalPrice += item.price;
+        }
+    });
+    
+    // Update total harga
+    totalPriceElement.textContent = `${totalPrice.toLocaleString()}`;
+}
+
+// Fungsi untuk menghapus produk dari keranjang
+function removeFromCart(index) {
+    // Mengambil data cart dari localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Menghapus produk yang sesuai dengan index
+    cart.splice(index, 1);
+    
+    // Menyimpan kembali cart ke dalam localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update tampilan keranjang setelah dihapus
+    updateCart();
+}
+
+// Fungsi untuk mengubah status checklist produk
+function toggleItemChecked(index, isChecked) {
+    // Mengambil data cart dari localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Menentukan item yang status checked-nya berubah
+    cart[index].checked = isChecked;
+    
+    // Menyimpan kembali cart ke dalam localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update tampilan keranjang
+    updateCart();
+}
+
+// Pastikan tampilan keranjang diupdate setiap kali halaman dimuat ulang
+window.onload = function() {
+    updateCart();
+}
+
+    </script>
+  </body>
+</html>
