@@ -80,16 +80,45 @@ button[type="submit"]:hover {
     background-color: rgba(255, 0, 0, 0.842);
 }
 
+button[type="submit"] {
+    background: linear-gradient(135deg, #ff3d6e 0%, #6c4bff 100%) !important;
+    border-radius: 30px !important;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(255, 61, 110, 0.3);
+    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(255, 61, 110, 0.45) !important;
+}
+
+.payment-container {
+    margin-top: 40px !important;
+    border-radius: 14px;
+}
+
+.nd-back-home {
+    display: inline-block;
+    margin: 16px 0 0 20px;
+    text-decoration: none;
+    color: #6c4bff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
     </style>
+    <link rel="stylesheet" href="../../CSS/common.css" />
 </head>
 <body>
+    <a class="nd-back-home" href="../../Keranjang.html">← Kembali ke Keranjang</a>
     <div class="payment-container">
         <h1>Halaman Pembayaran</h1>
         
         <div class="product-info">
             <h2>Produk yang Anda Beli:</h2>
             <img id="payment-product-image" src="../../images/nendoroid-jinx-arcane-ver-league-of-legends.jpg" alt="Produk" class="product-image">
-            <p >Nendoroid Jinx Arcane Ver.</p>
+            <p id="payment-product-name">Nendoroid Jinx Arcane Ver.</p>
             <p id="payment-product-price">Rp 820.000</p>
         </div>
 
@@ -114,6 +143,7 @@ button[type="submit"]:hover {
         </form>
     </div>
 
+    <script src="../../JS/cart.js"></script>
     <script>
         // Ambil data produk dari sessionStorage dan tampilkan di halaman pembayaran
         document.addEventListener('DOMContentLoaded', function () {
@@ -121,23 +151,40 @@ button[type="submit"]:hover {
             const productPrice = sessionStorage.getItem('productPrice');
             const productImage = sessionStorage.getItem('productImage');
 
-            document.getElementById('payment-product-name').innerText = productName;
-            document.getElementById('payment-product-price').innerText = productPrice;
-            document.getElementById('payment-product-image').src = productImage;
+            if (productName) document.getElementById('payment-product-name').innerText = productName;
+            if (productPrice) document.getElementById('payment-product-price').innerText = productPrice;
+            if (productImage) document.getElementById('payment-product-image').src = '../../' + productImage;
         });
 
         // Proses pembayaran
         document.getElementById('payment-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Menghentikan form dari reload halaman
-            
+
             // Ambil data dari form
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
             const paymentMethod = document.getElementById('payment-method').value;
 
-            // Tampilkan konfirmasi pembayaran
-            alert('Pembayaran berhasil! \nNama: ' + name + '\nTelepon: ' + phone + '\nAlamat: ' + address + '\nMetode Pembayaran: ' + paymentMethod);
+            // Hapus item yang sudah dicentang dari keranjang (checkout selesai)
+            try {
+                let cart = JSON.parse(localStorage.getItem('nd_cart')) || [];
+                cart = cart.filter(item => item.checked === false);
+                localStorage.setItem('nd_cart', JSON.stringify(cart));
+            } catch (e) {}
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Memproses...';
+
+            setTimeout(function () {
+                submitBtn.textContent = '✔ Pembayaran Berhasil';
+                if (typeof ndShowToast === 'function') {
+                    ndShowToast('Pembayaran berhasil diproses, ' + name + '! Terima kasih 🎉', 'success');
+                } else {
+                    alert('Pembayaran berhasil! Terima kasih, ' + name + '.');
+                }
+            }, 700);
         });
     </script>
 </body>

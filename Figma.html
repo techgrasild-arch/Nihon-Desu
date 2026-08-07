@@ -6,6 +6,8 @@
     <title>Nihon-Desu</title>
     <link rel="stylesheet" href="CSS/Category.css" />
 
+    <link rel="stylesheet" href="CSS/common.css" />
+  </head>
   <body>
     <!-- Header -->
      <!-- Seacrh -->
@@ -66,7 +68,7 @@
                     <span class="tag showcase">Pre-Order</span>
                     <h3>igma Laios Touden - Dungeon Meshi</h3>
                     <span class="on-sale">IDR 1.300.000</span>
-                </div>
+                <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('igma Laios Touden - Dungeon Meshi', 1300000, 'images/6.1-figma-laios-touden-dungeon-meshi-1647091955.jpg');">🛒 Tambah ke Keranjang</button></div>
             </div>
             <!-- Item 2 -->
             <div class="item">
@@ -78,7 +80,7 @@
                     <span class="tag showcase">Ready Stock</span>
                     <h3>figma Gawr Gura - hololive production</h3>
                     <span class="on-sale">IDR 1.200.000</span>
-                </div>
+                <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('figma Gawr Gura - hololive production', 1200000, 'images/6.2-figma-gawr-gura-hololive-production.jpg');">🛒 Tambah ke Keranjang</button></div>
             </div>
             <!-- Item 3 -->
             <div class="item">
@@ -87,7 +89,7 @@
                     <span class="tag showcase">Ready Stock</span>
                     <h3>figma Hayase Yuuka - Blue Archive</h3>
                     <span class="on-sale">IDR 1.200.000</span>
-                </div>
+                <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('figma Hayase Yuuka - Blue Archive', 1200000, 'images/6.3-figma-hayase-yuuka-blue-archive-1016753752.jpg');">🛒 Tambah ke Keranjang</button></div>
             </div>
             <!-- Item 4 -->
             <div class="item">
@@ -96,7 +98,7 @@
                     <span class="tag showcase">Late Pre-Order</span>
                     <h3>figma Lady Maria of the Astral Clocktower - DX Edition</h3>
                     <span class="on-sale">IDR 2.000.000</span>
-                </div>
+                <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('figma Lady Maria of the Astral Clocktower - DX Edition', 2000000, 'images/6.4-figma-lady-maria-of-the-astral-clocktower-dx-edition.jpg');">🛒 Tambah ke Keranjang</button></div>
             </div>
             <!-- Item 5 -->
             <div class="item">
@@ -105,7 +107,7 @@
                     <span class="tag showcase">Ready Stock</span>
                     <h3>figma Mio - Xenoblade Chronicles 3</h3>
                     <span class="on-sale">IDR 1.450.000</span>
-                </div>
+                <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('figma Mio - Xenoblade Chronicles 3', 1450000, 'images/6.5-figma-mio-xenoblade-chronicles-3-1602031409.jpg');">🛒 Tambah ke Keranjang</button></div>
             </div>
         </div>
     </div>
@@ -137,12 +139,13 @@
           <!-- Kolom Ikuti Kami dan Gambar -->
           <div class="F-Column">
   
-            <img src="path-to-mascot-image.png" alt="Tokopedia Mascot" class="footer_image">
+            <img src="images/footer.png" alt="Nihon-Desu Mascot" class="footer_image">
             <p>&copy; 2024–2025, Nihon-Desu</p>
           </div>
         </div>
       </footer>
       <!-- End footer -->
-       <script src="JS/script.js"></script>
-  </html>
-  
+       <script src="JS/cart.js"></script>
+<script src="JS/script.js"></script>
+  </body>
+</html>

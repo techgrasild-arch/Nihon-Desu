@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nihon-Desu</title>
     <link rel="stylesheet" href="CSS/keranjang.css" />
+    <link rel="stylesheet" href="CSS/common.css" />
   </head>
   <body>
     <!-- Header -->
@@ -86,117 +87,13 @@
         </div>
 
         <div class="F-Column">
-          <img src="path-to-mascot-image.png" alt="Mascot" class="footer_image" />
+          <img src="images/footer.png" alt="Mascot" class="footer_image" style="width: 100%;height: 100%;margin-top: -20%;" />
           <p>&copy; 2024–2025, Nihon-Desu</p>
         </div>
       </div>
     </footer>
     <!-- End footer -->
 
-    <script>
-   // Fungsi untuk menambahkan produk ke dalam keranjang
-function addToCart(productName, productPrice, productImage) {
-    // Menambahkan produk ke dalam localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Membuat objek produk
-    const product = {
-        name: productName,
-        price: productPrice,
-        image: productImage,
-        checked: false // Default status checklist
-    };
-    
-    // Menambahkan produk ke dalam array cart
-    cart.push(product);
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Menampilkan notifikasi
-    alert(`Produk "${productName}" berhasil ditambahkan ke keranjang!`);
-    
-    // Update halaman keranjang
-    updateCart();
-}
-
-// Fungsi untuk mengupdate tampilan keranjang
-function updateCart() {
-    const cartContainer = document.getElementById('cart-items');
-    const totalPriceElement = document.getElementById('total-price');
-    
-    // Mengambil data cart dari localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Kosongkan keranjang sebelumnya
-    cartContainer.innerHTML = '';
-    
-    let totalPrice = 0;
-    
-    // Looping untuk menampilkan produk di keranjang
-    cart.forEach((item, index) => {
-        const cartItemElement = document.createElement('div');
-        cartItemElement.classList.add('cart-item');
-        cartItemElement.innerHTML = `
-            <input type="checkbox" class="cart-item-check" data-index="${index}" ${item.checked ? 'checked' : ''} />
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image" />
-            <p class="cart-item-name">${item.name}</p>
-            <p class="cart-item-price">Rp ${item.price.toLocaleString()}</p>
-            <button class="cart-item-remove" onclick="removeFromCart(${index})">Hapus</button>
-        `;
-        
-        // Menambahkan event listener untuk checkbox
-        cartItemElement.querySelector('.cart-item-check').addEventListener('change', function() {
-            toggleItemChecked(index, this.checked);
-        });
-        
-        cartContainer.appendChild(cartItemElement);
-        
-        // Tambahkan ke total jika dichecklist
-        if (item.checked) {
-            totalPrice += item.price;
-        }
-    });
-    
-    // Update total harga
-    totalPriceElement.textContent = `${totalPrice.toLocaleString()}`;
-}
-
-// Fungsi untuk menghapus produk dari keranjang
-function removeFromCart(index) {
-    // Mengambil data cart dari localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Menghapus produk yang sesuai dengan index
-    cart.splice(index, 1);
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Update tampilan keranjang setelah dihapus
-    updateCart();
-}
-
-// Fungsi untuk mengubah status checklist produk
-function toggleItemChecked(index, isChecked) {
-    // Mengambil data cart dari localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Menentukan item yang status checked-nya berubah
-    cart[index].checked = isChecked;
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Update tampilan keranjang
-    updateCart();
-}
-
-// Pastikan tampilan keranjang diupdate setiap kali halaman dimuat ulang
-window.onload = function() {
-    updateCart();
-}
-
-    </script>
+    <script src="JS/cart.js"></script>
   </body>
 </html>

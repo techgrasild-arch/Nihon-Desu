@@ -1,0 +1,767 @@
+/* ==========================================================================
+   Nihon-Desu — Common Theme Layer v2
+   Palet inti: MERAH - HITAM - PUTIH saja (terinspirasi kyou.id).
+   Rapi, kontras jelas, harga & tombol sejajar di setiap kartu produk.
+   File ini ditambahkan di SETIAP halaman SETELAH stylesheet lama — tidak
+   menghapus apa pun, hanya menata ulang tampilan supaya lebih enak dilihat.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --nd-red: #e4032c;
+  --nd-red-dark: #b8021f;
+  --nd-black: #161616;
+  --nd-grey-900: #222222;
+  --nd-grey-100: #f4f4f4;
+  --nd-grey-200: #e9e9e9;
+  --nd-border: #e2e2e2;
+  --nd-radius: 10px;
+  --nd-transition: all 0.2s ease;
+  --nd-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+  --nd-shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+* {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif !important;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff !important;
+  color: var(--nd-black);
+}
+
+::selection {
+  background: var(--nd-red);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: var(--nd-grey-100); }
+::-webkit-scrollbar-thumb { background: var(--nd-black); border-radius: 10px; }
+
+/* ---------------------------------------------------------------------- */
+/* NAVBAR — bersih, putih, aksen merah, tanpa efek kaca                   */
+/* ---------------------------------------------------------------------- */
+nav {
+  position: fixed !important;
+  top: 0;
+  background: #fff !important;
+  border-bottom: 1px solid var(--nd-border);
+  box-shadow: none;
+  transition: var(--nd-transition);
+}
+
+nav.nd-scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo img { transition: var(--nd-transition); }
+
+.logo ul li a,
+.right-menu li a,
+.menu > ul > li > a {
+  color: var(--nd-black) !important;
+  font-weight: 600 !important;
+  position: relative;
+  transition: var(--nd-transition) !important;
+}
+
+.logo ul li a::after,
+.right-menu li a::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--nd-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--nd-transition);
+}
+
+.logo ul li a:hover,
+.right-menu li a:hover {
+  background: var(--nd-grey-100) !important;
+  color: var(--nd-red) !important;
+}
+
+.logo ul li a:hover::after,
+.right-menu li a:hover::after {
+  transform: scaleX(1);
+}
+
+.dropdown {
+  border-radius: 8px !important;
+  box-shadow: var(--nd-shadow) !important;
+  border: 1px solid var(--nd-border);
+}
+
+.dropdown li a {
+  border-radius: 6px;
+  color: var(--nd-black) !important;
+  font-weight: 500 !important;
+}
+
+.dropdown li a:hover {
+  background: var(--nd-red) !important;
+  color: #fff !important;
+}
+
+/* Search bar */
+.search input {
+  border-radius: 6px 0 0 6px !important;
+  border: 1.5px solid var(--nd-border) !important;
+  transition: var(--nd-transition);
+}
+
+.search input:focus {
+  border-color: var(--nd-red) !important;
+  box-shadow: 0 0 0 3px rgba(228, 3, 44, 0.12);
+}
+
+.search .search-button,
+.search-button {
+  background: var(--nd-red) !important;
+  border-radius: 0 6px 6px 0 !important;
+  font-weight: 600 !important;
+  transition: var(--nd-transition) !important;
+}
+
+.search .search-button:hover,
+.search-button:hover {
+  background: var(--nd-red-dark) !important;
+}
+
+/* Basket / cart icon + badge */
+.basket {
+  transition: var(--nd-transition) !important;
+}
+
+.basket:hover {
+  transform: scale(1.1);
+}
+
+.nd-cart-badge {
+  position: absolute;
+  top: -7px;
+  right: 5px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: var(--nd-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Mobile hamburger */
+.nd-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 50;
+}
+
+.nd-hamburger span {
+  width: 24px;
+  height: 2.5px;
+  background: var(--nd-black);
+  border-radius: 2px;
+  transition: var(--nd-transition);
+}
+
+/* ---------------------------------------------------------------------- */
+/* SLIDESHOW / BANNER — full width, rapi, satu gambar tampil penuh        */
+/* ---------------------------------------------------------------------- */
+.background {
+  width: 100% !important;
+  height: auto !important;
+  position: relative;
+  overflow: hidden;
+  margin-top: 68px;
+  background: #fff !important;
+  padding-bottom: 6px;
+}
+
+.slideshow {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: block !important;
+  padding: 20px;
+}
+
+.slideshow-container {
+  display: flex;
+  width: 100% !important;
+  aspect-ratio: 21 / 7;
+  border-radius: var(--nd-radius);
+  overflow: hidden;
+  box-shadow: var(--nd-shadow);
+}
+
+.slideshow-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  margin: 0 !important;
+  flex-shrink: 0;
+}
+
+.Bg-slide {
+  background: #fff !important;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--nd-shadow);
+  transition: var(--nd-transition);
+}
+
+.Bg-slide:hover {
+  background: var(--nd-red) !important;
+}
+
+.Bg-slide:hover img {
+  filter: brightness(0) invert(1);
+}
+
+/* ---------------------------------------------------------------------- */
+/* BUTTONS                                                                 */
+/* ---------------------------------------------------------------------- */
+.btn-buy,
+.checkout-btn {
+  background: var(--nd-black) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: var(--nd-transition) !important;
+  letter-spacing: 0.2px;
+}
+
+.btn-buy:hover,
+.checkout-btn:hover {
+  background: var(--nd-red) !important;
+}
+
+.btn-cart {
+  background: #fff !important;
+  border: 1.5px solid var(--nd-black) !important;
+  color: var(--nd-black) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: var(--nd-transition) !important;
+}
+
+.btn-cart:hover {
+  background: var(--nd-black) !important;
+  color: #fff !important;
+}
+
+/* Quick "add to cart" button injected into product cards */
+.nd-add-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--nd-red);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: var(--nd-transition);
+}
+
+.nd-add-cart:hover {
+  background: var(--nd-red-dark);
+}
+
+.nd-add-cart:active {
+  transform: scale(0.98);
+}
+
+/* ---------------------------------------------------------------------- */
+/* PRODUCT CARDS — grid seragam, harga & tombol selalu sejajar            */
+/* ---------------------------------------------------------------------- */
+.items-grid,
+.trending-grid {
+  align-items: stretch !important;
+}
+
+.item,
+.trending-item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100%;
+  background: #fff !important;
+  border: 1px solid var(--nd-border) !important;
+  border-radius: var(--nd-radius) !important;
+  overflow: hidden;
+  padding: 0 !important;
+  text-align: left !important;
+  transition: var(--nd-transition) !important;
+  box-shadow: none !important;
+}
+
+.item:hover,
+.trending-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--nd-shadow-hover) !important;
+  border-color: var(--nd-black) !important;
+}
+
+/* Gambar produk — rasio seragam supaya baris kartu rapi */
+.item > a,
+.item > img {
+  display: block;
+  width: 100%;
+}
+
+.item img,
+.trending-item img {
+  width: 100% !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  height: auto !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  transition: transform 0.3s ease;
+}
+
+.item:hover img,
+.trending-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Info area — flex-grow supaya tombol & harga selalu di baris bawah yg sama */
+.item-info,
+.item-details {
+  display: flex !important;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 12px 14px 14px !important;
+  gap: 6px;
+}
+
+.tag.showcase {
+  align-self: flex-start;
+  background: var(--nd-red) !important;
+  border: none;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+  margin: 0 !important;
+}
+
+.item-info h3,
+.item-details h3,
+.trending-item h3 {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: var(--nd-black) !important;
+  line-height: 1.35;
+  margin: 0 !important;
+  min-height: 2.7em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left !important;
+}
+
+.on-sale,
+.item-details p,
+.trending-item p,
+.product-price {
+  color: var(--nd-red) !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  margin: 0 !important;
+  margin-top: auto !important;
+  padding-top: 4px;
+  text-align: left !important;
+}
+
+.item .title {
+  color: var(--nd-black) !important;
+}
+
+.nd-add-cart {
+  margin-top: 8px;
+}
+
+.header .load-more {
+  color: var(--nd-red) !important;
+  font-weight: 600 !important;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+.header .load-more:hover {
+  text-decoration: underline;
+}
+
+.header h2,
+h2 {
+  color: var(--nd-black) !important;
+  font-weight: 700 !important;
+}
+
+/* Kategori icon-grid (beranda) tetap rapi & center */
+.Category-grid .item {
+  align-items: center;
+  text-align: center !important;
+}
+
+.Category-grid .item img {
+  aspect-ratio: 1 / 1;
+  border-radius: 50% !important;
+  width: 70% !important;
+  margin: 12px auto 0 !important;
+}
+
+.Category-grid .item .title,
+.Category-grid .item-info h3 {
+  text-align: center !important;
+  min-height: unset;
+  -webkit-line-clamp: unset;
+}
+
+/* Fade-in-up animation applied via JS (IntersectionObserver) */
+.nd-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.nd-reveal.nd-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------------- */
+/* TOAST NOTIFICATIONS                                                    */
+/* ---------------------------------------------------------------------- */
+#nd-toast-container {
+  position: fixed;
+  top: 84px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.nd-toast {
+  min-width: 240px;
+  max-width: 320px;
+  background: #fff;
+  border-left: 4px solid var(--nd-red);
+  border-radius: 6px;
+  box-shadow: var(--nd-shadow-hover);
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--nd-black);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: nd-toast-in 0.3s ease;
+}
+
+.nd-toast.nd-toast-out {
+  animation: nd-toast-out 0.25s ease forwards;
+}
+
+.nd-toast .nd-toast-icon { font-size: 17px; }
+
+@keyframes nd-toast-in {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes nd-toast-out {
+  to { opacity: 0; transform: translateX(30px); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* BACK TO TOP                                                            */
+/* ---------------------------------------------------------------------- */
+#nd-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--nd-black);
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  box-shadow: var(--nd-shadow-hover);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: var(--nd-transition);
+  z-index: 999;
+}
+
+#nd-back-to-top.nd-show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#nd-back-to-top:hover {
+  background: var(--nd-red);
+}
+
+/* ---------------------------------------------------------------------- */
+/* KERANJANG (cart page)                                                  */
+/* ---------------------------------------------------------------------- */
+.cart {
+  max-width: 900px !important;
+  margin: 100px auto 60px !important;
+  background: #fff;
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius);
+  box-shadow: var(--nd-shadow);
+  padding: 28px !important;
+}
+
+.cart h2 {
+  text-align: left !important;
+  border-bottom: 2px solid var(--nd-grey-100);
+  padding-bottom: 14px;
+}
+
+.cart-item {
+  display: flex !important;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--nd-grey-100);
+  transition: var(--nd-transition);
+}
+
+.cart-item:hover {
+  background: var(--nd-grey-100);
+}
+
+.cart-item-image,
+.cart-item img,
+.cart .product-image {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid var(--nd-border);
+}
+
+.cart-item-name,
+.cart-item p {
+  flex: 1;
+  color: var(--nd-black);
+}
+
+.cart-item-price {
+  color: var(--nd-red) !important;
+  font-weight: 700;
+}
+
+.cart-item-remove,
+.remove-btn {
+  background: var(--nd-grey-100) !important;
+  color: var(--nd-red) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600;
+  transition: var(--nd-transition) !important;
+}
+
+.cart-item-remove:hover,
+.remove-btn:hover {
+  background: var(--nd-red) !important;
+  color: #fff !important;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 2px solid var(--nd-grey-100);
+}
+
+.total,
+.total * {
+  color: var(--nd-black) !important;
+}
+
+.total .checkout-btn,
+.total .checkout-btn * {
+  color: #fff !important;
+}
+
+.nd-cart-empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: #999;
+}
+
+.nd-cart-empty a {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 22px;
+  background: var(--nd-black);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nd-cart-empty a:hover {
+  background: var(--nd-red);
+}
+
+.nd-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nd-qty button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--nd-border);
+  background: #fff;
+  font-weight: 700;
+  color: var(--nd-black);
+  transition: var(--nd-transition);
+}
+
+.nd-qty button:hover {
+  border-color: var(--nd-red);
+  color: var(--nd-red);
+}
+
+/* ---------------------------------------------------------------------- */
+/* FOOTER — hitam pekat, aksen merah saat hover                           */
+/* ---------------------------------------------------------------------- */
+.footer {
+  background: var(--nd-black) !important;
+  color: #cfcfcf;
+  margin-top: 20px;
+}
+
+.F-Column h3 {
+  color: #fff !important;
+}
+
+.F-Column ul li a {
+  color: #b7b7b7 !important;
+  transition: var(--nd-transition);
+}
+
+.F-Column ul li a:hover {
+  color: var(--nd-red) !important;
+  padding-left: 4px;
+}
+
+.social_icons img {
+  border-radius: 6px;
+  transition: var(--nd-transition);
+}
+
+.social_icons img:hover {
+  transform: translateY(-3px);
+}
+
+/* ---------------------------------------------------------------------- */
+/* RESPONSIVE                                                             */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .nd-hamburger { display: flex; }
+  .search { display: none !important; }
+
+  .logo > ul {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 90px 20px 20px;
+    box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+    transition: right 0.3s ease;
+    z-index: 40;
+    overflow-y: auto;
+  }
+
+  .logo > ul.nd-menu-open { right: 0; }
+
+  .right-menu > li {
+    display: none;
+  }
+
+  .right-menu {
+    gap: 8px !important;
+  }
+
+  .menu .dropdown {
+    position: static !important;
+    display: none !important;
+    box-shadow: none !important;
+    padding-left: 10px;
+  }
+
+  .menu li:hover .dropdown,
+  .menu li.nd-dropdown-open .dropdown {
+    display: flex !important;
+  }
+
+  .cart-item { flex-wrap: wrap; }
+  .slideshow-container { aspect-ratio: 16 / 9; }
+}

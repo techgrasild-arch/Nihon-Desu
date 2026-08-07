@@ -6,6 +6,8 @@
     <title>Nihon-Desu</title>
     <link rel="stylesheet"  href="../CSS/Shop.css" />
 
+    <link rel="stylesheet" href="../CSS/common.css" />
+  </head>
   <body>
     <!-- Header -->
      <!-- Seacrh -->
@@ -76,7 +78,7 @@
                   <button class="btn btn-buy" onclick="goToPaymentPage()">Beli Sekarang</button>
                 </a>
         
-                  <button class="btn btn-cart" onclick="addToCart('Pop Up Parade Figure Kaiju No 8', 700.000 , 'images/4.1-pop-up-parade-figure-kaiju-no-8-kaiju-no-8-1828013321.jpg')">Tambahkan ke Keranjang</button>
+                  <button class="btn btn-cart" onclick="addToCart('Pop Up Parade Figure Kaiju No 8', 700000, 'images/4.1-pop-up-parade-figure-kaiju-no-8-kaiju-no-8-1828013321.jpg')">Tambahkan ke Keranjang</button>
               </div>
           </div>
       </div>
@@ -96,7 +98,7 @@
         <div class="item-details">
           <h3>Artfx J Figure 1/8 Uzui Tengen Kimetsu No Yaiba</h3>
           <p>IDR 2.500.000</p>
-        </div>
+        <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('Artfx J Figure 1/8 Uzui Tengen Kimetsu No Yaiba', 2500000, '../images/2.1-artfx-j-figure-18-uzui-tengen-kimetsu-no-yaiba.jpg');">🛒 Tambah ke Keranjang</button></div>
       </div>
       <!-- Item 2 -->
       <div class="trending-item">
@@ -104,15 +106,15 @@
         <div class="item-details">
           <h3>Ichiban Kuji Figure Hoshina Soshiro Kaiju No 8 2nd Edition A Prize 10cm</h3>
           <p>IDR 1.500.000</p>
-        </div>
+        <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('Ichiban Kuji Figure Hoshina Soshiro Kaiju No 8 2nd Edition A Prize 10cm', 1500000, '../images/3.1-ichiban-kuji-figure-hoshina-soshiro-kaiju-no-8-2nd-edition-a-prize-10cm.jpg');">🛒 Tambah ke Keranjang</button></div>
       </div>
       <!-- Item 3 -->
       <div class="trending-item">
-        <img src="../images/4.1-pop-up-parade-figure-kaiju-no-8-kaiju-no-8-1828013321.jpg"Bola Basket">
+        <img src="../images/4.1-pop-up-parade-figure-kaiju-no-8-kaiju-no-8-1828013321.jpg" alt="Bola Basket">
         <div class="item-details">
           <h3>Pop Up Parade Figure Kaiju No 8 Kaiju No 8</h3>
           <p>IDR 680.000</p>
-        </div>
+        <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('Pop Up Parade Figure Kaiju No 8 Kaiju No 8', 680000, '../images/4.1-pop-up-parade-figure-kaiju-no-8-kaiju-no-8-1828013321.jpg');">🛒 Tambah ke Keranjang</button></div>
       </div>
       <!-- Item 4 -->
       <div class="trending-item">
@@ -120,7 +122,7 @@
         <div class="item-details">
           <h3>Grand Ship Collection MG Thousand Sunny - One Piece New World Ver.</h3>
           <p>IDR 950.000</p>
-        </div>
+        <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('Grand Ship Collection MG Thousand Sunny - One Piece New World Ver.', 950000, '../images/5.1-grand-ship-collection-mg-thousand-sunny-one-piece-new-world-ver.jpg');">🛒 Tambah ke Keranjang</button></div>
       </div>
       <!-- Item 5 -->
       <div class="trending-item">
@@ -128,7 +130,7 @@
         <div class="item-details">
           <h3>igma Laios Touden - Dungeon Meshi</h3>
           <p>IDR 1.300.000</p>
-        </div>
+        <button type="button" class="nd-add-cart" onclick="event.preventDefault(); event.stopPropagation(); addToCart('igma Laios Touden - Dungeon Meshi', 1300000, '../images/6.1-figma-laios-touden-dungeon-meshi-1647091955.jpg');">🛒 Tambah ke Keranjang</button></div>
       </div>
 
     </div>
@@ -169,7 +171,8 @@
         </div>
       </footer>
       <!-- End footer -->
-       <script>
+       <script src="../JS/cart.js"></script>
+<script>
          function goToPaymentPage() {
     console.log("Tombol Beli ditekan!"); // Log ke konsol
 
@@ -183,110 +186,7 @@
 
     window.location.href = "../pembayaran.html"; // Arahkan ke halaman pembayaran
 }
-
-     // Fungsi untuk menambahkan produk ke dalam keranjang
-function addToCart(productName, productPrice, productImage) {
-    // Menambahkan produk ke dalam localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Membuat objek produk
-    const product = {
-        name: productName,
-        price: productPrice,
-        image: productImage,
-        checked: false // Default status checklist
-    };
-    
-    // Menambahkan produk ke dalam array cart
-    cart.push(product);
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Menampilkan notifikasi
-    alert(`Produk "${productName}" berhasil ditambahkan ke keranjang!`);
-    
-    // Update halaman keranjang
-    updateCart();
-}
-
-// Fungsi untuk mengupdate tampilan keranjang
-function updateCart() {
-    const cartContainer = document.getElementById('cart-items');
-    const totalPriceElement = document.getElementById('total-price');
-    
-    // Mengambil data cart dari localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Kosongkan keranjang sebelumnya
-    cartContainer.innerHTML = '';
-    
-    let totalPrice = 0;
-    
-    // Looping untuk menampilkan produk di keranjang
-    cart.forEach((item, index) => {
-        const cartItemElement = document.createElement('div');
-        cartItemElement.classList.add('cart-item');
-        cartItemElement.innerHTML = `
-            <input type="checkbox" class="cart-item-check" data-index="${index}" ${item.checked ? 'checked' : ''} />
-            <img src="${item.image}" alt="${item.name}" class="product-image" />
-            <p>${item.name}</p>
-            <p>Rp ${item.price.toLocaleString()}</p>
-            <button class="remove-btn" onclick="removeFromCart(${index})">Hapus</button>
-        `;
-        
-        // Menambahkan event listener untuk checkbox
-        cartItemElement.querySelector('.cart-item-check').addEventListener('change', function() {
-            toggleItemChecked(index, this.checked);
-        });
-        
-        cartContainer.appendChild(cartItemElement);
-        
-        // Tambahkan ke total jika dichecklist
-        if (item.checked) {
-            totalPrice += item.price;
-        }
-    });
-    
-    // Update total harga
-    totalPriceElement.textContent = `Total: Rp ${totalPrice.toLocaleString()}`;
-}
-
-// Fungsi untuk menghapus produk dari keranjang
-function removeFromCart(index) {
-    // Mengambil data cart dari localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Menghapus produk yang sesuai dengan index
-    cart.splice(index, 1);
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Update tampilan keranjang setelah dihapus
-    updateCart();
-}
-
-// Fungsi untuk mengubah status checklist produk
-function toggleItemChecked(index, isChecked) {
-    // Mengambil data cart dari localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Menentukan item yang status checked-nya berubah
-    cart[index].checked = isChecked;
-    
-    // Menyimpan kembali cart ke dalam localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Update tampilan keranjang
-    updateCart();
-}
-
-// Pastikan tampilan keranjang diupdate setiap kali halaman dimuat ulang
-window.onload = function() {
-    updateCart();
-}
-
-       </script>
-  </html>
-  
+    // (cart logic kini terpusat di JS/cart.js)
+</script>
+  </body>
+</html>

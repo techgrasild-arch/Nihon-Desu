@@ -163,9 +163,36 @@ button.btn:hover {
             transition: background-color 0.3s ease;
         }
       
+      button.btn {
+          background: linear-gradient(135deg, #ff3d6e 0%, #6c4bff 100%);
+          box-shadow: 0 6px 16px rgba(255, 61, 110, 0.3);
+          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      button.btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(255, 61, 110, 0.45);
+      }
+      .signin-form {
+          animation: nd-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @keyframes nd-fade-up {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      .nd-back-home {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          text-decoration: none;
+          color: #6c4bff;
+          font-weight: 600;
+          font-size: 14px;
+      }
     </style>
+    <link rel="stylesheet" href="CSS/common.css" />
 </head>
 <body>
+    <a class="nd-back-home" href="index.html">← Kembali ke Beranda</a>
     <div class="signin-container">
             <img src="images/Sign in.png" style="height: 400px;width: 400px;">
         <div class="signin-form">
