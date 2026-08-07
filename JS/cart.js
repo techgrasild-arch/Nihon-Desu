@@ -244,12 +244,17 @@
 
     // Pindahkan link "Sign in / Login" ke dalam drawer supaya tetap bisa
     // diakses di layar kecil tanpa membuat top bar sesak.
+    // Diberi class khusus + disembunyikan lewat CSS secara default supaya
+    // TIDAK muncul dobel di sebelah "Category" pada tampilan desktop.
     var rightMenuLi = menu.querySelector(".right-menu > li");
     if (rightMenuLi) {
       var divider = document.createElement("li");
+      divider.className = "nd-mobile-signin-item";
       divider.innerHTML = '<hr style="border:none;border-top:1px solid #eee;margin:10px 0;">';
       list.appendChild(divider);
-      list.appendChild(rightMenuLi.cloneNode(true));
+      var clonedLi = rightMenuLi.cloneNode(true);
+      clonedLi.className = "nd-mobile-signin-item";
+      list.appendChild(clonedLi);
     }
 
     var burger = document.createElement("button");

@@ -1,74 +1,80 @@
+// ============================================================
+// Slideshow banner (fade carousel) — hanya jalan jika elemennya
+// ada di halaman ini, supaya tidak error di halaman lain.
+// ============================================================
+(function () {
+  var container = document.querySelector(".slideshow-container");
+  if (!container) return;
 
-// SLide background
-let currentIndex1 = 0;
-const slides = document.querySelectorAll('.slideshow-container img');
-const totalSlides = slides.length;
-const firstSlideClone = slides[0].cloneNode(true);
-document.querySelector('.slideshow-container').appendChild(firstSlideClone);
+  var slides = Array.prototype.slice.call(container.querySelectorAll("img"));
+  if (slides.length === 0) return;
 
-const newTotalSlides = slides.length + 1; 
+  var nextBtn = document.querySelector(".Bg-slide.next");
+  var prevBtn = document.querySelector(".Bg-slide.prev");
+  var current = 0;
+  var autoplayTimer = null;
 
-document.querySelector('.next').addEventListener('click', () => {
-  currentIndex1++;
-  if (currentIndex1 >= newTotalSlides) {
-    currentIndex1 = 1; 
-    document.querySelector('.slideshow-container').style.transition = 'none'; // Disable transition for instant jump
-    updateSlidePosition();
-    setTimeout(() => {
-      document.querySelector('.slideshow-container').style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
-    }, 20); 
+  // Buat titik indikator (dots) di bawah banner
+  var dotsWrap = document.createElement("div");
+  dotsWrap.className = "nd-slide-dots";
+  slides.forEach(function (_, i) {
+    var dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", "Slide " + (i + 1));
+    dot.addEventListener("click", function () {
+      goToSlide(i);
+    });
+    dotsWrap.appendChild(dot);
+  });
+  var slideshowWrap = document.querySelector(".slideshow");
+  if (slideshowWrap) slideshowWrap.appendChild(dotsWrap);
+
+  function render() {
+    slides.forEach(function (img, i) {
+      img.classList.toggle("nd-slide-active", i === current);
+    });
+    var dots = dotsWrap.querySelectorAll("button");
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle("nd-dot-active", i === current);
+    });
   }
-  updateSlidePosition();
-});
 
-document.querySelector('.prev').addEventListener('click', () => {
-  currentIndex1--;
-  if (currentIndex1 < 0) {
-    currentIndex1 = newTotalSlides - 2; 
-    document.querySelector('.slideshow-container').style.transition = 'none'; // Disable transition for instant jump
-    updateSlidePosition();
-    setTimeout(() => {
-      document.querySelector('.slideshow-container').style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition
-    }, 20); 
+  function goToSlide(index) {
+    current = (index + slides.length) % slides.length;
+    render();
   }
-  updateSlidePosition();
-});
 
-function updateSlidePosition() {
-  const slideWidth = slides[0].clientWidth;
-  const newTransformValue = -currentIndex1 * slideWidth;
-  document.querySelector('.slideshow-container').style.transform = `translateX(${newTransformValue}px)`;
-}
+  function nextSlide() {
+    goToSlide(current + 1);
+  }
 
-setInterval(() => {
-  document.querySelector('.next').click();
-}, 5000);
-// Slide end
+  function prevSlide() {
+    goToSlide(current - 1);
+  }
 
-    let currentIndex = 0;
-    const items = document.querySelectorAll('.slider-items .item');
-    const totalItems = items.length;
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, 5000);
+  }
 
-    function updateSlider() {
-        const slider = document.querySelector('.slider-items');
-        const offset = -currentIndex * (100 / totalItems); // Adjust based on item width
-        slider.style.transform = `translateX(${offset}%)`;
-    }
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+  }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateSlider();
-    }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      nextSlide();
+      startAutoplay();
+    });
+  }
 
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        updateSlider();
-    }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      prevSlide();
+      startAutoplay();
+    });
+  }
 
-    document.querySelector('.category-next').addEventListener('click', nextSlide);
-    document.querySelector('.category-prev').addEventListener('click', prevSlide);
-
-    // Automatic sliding every 3 seconds
-    setInterval(nextSlide, 3000);
-
- 
+  render();
+  startAutoplay();
+})();
