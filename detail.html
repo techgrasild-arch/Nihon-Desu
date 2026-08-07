@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nihon-Desu</title>
+    <link rel="stylesheet" href="CSS/Shop.css" />
+    <link rel="stylesheet" href="CSS/common.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <nav>
+      <div class="menu">
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/Nihon-Desu.png" />
+          </a>
+          <ul>
+            <li>
+              <a href="#">Category</a>
+              <ul class="dropdown">
+                <li><a href="Nendoroid.html">Nendoroid</a></li>
+                <li><a href="ScaledFigure.html">Scaled Figure</a></li>
+                <li><a href="PriceFigure.html">Prize Figure</a></li>
+                <li><a href="PopUpParade.html">Pop up parade</a></li>
+                <li><a href="ModelKit.html">Model Kit</a></li>
+                <li><a href="Figma.html">Figma</a></li>
+                <li><a href="Marchindise.html">Merchandise</a></li>
+                <li><a href="LightNovel.html">Light novel</a></li>
+                <li><a href="Manga.html">Manga</a></li>
+                <li><a href="Cosplay.html">Cosplayer items</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="search">
+          <input type="text" placeholder="search..." />
+          <button class="search-button">search</button>
+        </div>
+        <ul class="right-menu">
+          <a href="Keranjang.html">
+            <img class="basket" src="images/basket-shopping-solid.svg" />
+          </a>
+          <li><a href="sign in.html">Masuk</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header END -->
+
+    <!-- Shop -->
+    <div class="product-container">
+      <div class="product-details">
+        <div class="product-image">
+          <img id="product-image" src="images/footer.png" alt="Produk" />
+        </div>
+
+        <div class="product-info">
+          <h1 class="product-title" id="product-title">Memuat produk...</h1>
+          <p class="product-price" id="product-price">Rp 0</p>
+          <p class="product-status">Status: <span class="in-stock">In Stock</span></p>
+
+          <div class="product-description">
+            <h2>Deskripsi</h2>
+            <p id="product-description">
+              Produk koleksi resmi dari Nihon-Desu. Kualitas terjamin, cocok untuk melengkapi
+              koleksi figure, merchandise, dan barang hobi kesayanganmu.
+            </p>
+          </div>
+
+          <div class="product-buttons">
+            <button class="btn btn-buy" id="buy-now-btn">Beli Sekarang</button>
+            <button class="btn btn-cart" id="add-cart-btn">Tambahkan ke Keranjang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Shop END -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="F-container">
+        <div class="F-Column">
+          <h3>Nihon-Desu</h3>
+          <ul>
+            <li><a href="#">Tentang Nihon-Desu</a></li>
+            <li><a href="#">Pembuat</a></li>
+          </ul>
+        </div>
+        <div class="F-Column">
+          <h3>Bantuan dan Panduan</h3>
+          <ul>
+            <li><a href="#">Nihon-Desu Care</a></li>
+            <li><a href="#">Syarat dan Ketentuan</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+          </ul>
+          <h3>Ikuti Kami</h3>
+          <div class="social_icons">
+            <a href="#"><img src="images/Facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="images/Instagram.jpg" alt="Instagram" /></a>
+          </div>
+        </div>
+
+        <div class="F-Column">
+          <img
+            src="images/footer.png"
+            alt="Nihon-Desu Mascot"
+            class="footer_image"
+            style="width: 100%; height: 100%; margin-top: -20%"
+          />
+          <p style="margin-top: -10%">&copy; 2024–2025, Nihon-Desu</p>
+        </div>
+      </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="JS/cart.js"></script>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var name = params.get("name") || "Produk Nihon-Desu";
+        var price = parseInt(params.get("price"), 10) || 0;
+        var image = params.get("image") || "images/footer.png";
+
+        document.getElementById("product-title").innerText = name;
+        document.getElementById("product-price").innerText =
+          "Rp " + price.toLocaleString("id-ID");
+        document.getElementById("product-image").src = image;
+        document.getElementById("product-image").alt = name;
+        document.title = name + " - Nihon-Desu";
+
+        document.getElementById("add-cart-btn").addEventListener("click", function () {
+          addToCart(name, price, image);
+        });
+
+        document.getElementById("buy-now-btn").addEventListener("click", function () {
+          sessionStorage.setItem("productName", name);
+          sessionStorage.setItem("productPrice", "Rp " + price.toLocaleString("id-ID"));
+          sessionStorage.setItem("productImage", image);
+          window.location.href = "HTML/pay/pembayaran.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

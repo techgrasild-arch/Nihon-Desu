@@ -101,12 +101,33 @@ nav.nd-scrolled {
   border-radius: 8px !important;
   box-shadow: var(--nd-shadow) !important;
   border: 1px solid var(--nd-border);
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  min-width: 200px !important;
+  width: max-content !important;
+  max-width: 240px;
+  padding: 6px !important;
+}
+
+.menu ul li:hover .dropdown {
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+}
+
+.dropdown li {
+  margin: 0 !important;
+  width: 100%;
 }
 
 .dropdown li a {
+  display: block;
   border-radius: 6px;
   color: var(--nd-black) !important;
   font-weight: 500 !important;
+  font-size: 13.5px !important;
+  padding: 8px 12px !important;
+  white-space: nowrap;
 }
 
 .dropdown li a:hover {
@@ -480,19 +501,20 @@ h2 {
   font-weight: 700 !important;
 }
 
-/* Kategori icon-grid (beranda) — rapat, tanpa kartu/border berlebih */
+/* Kategori icon-grid (beranda) — rapat, satu baris teks, tidak melebar */
 .Category-grid {
   display: flex !important;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px !important;
+  gap: 4px 6px !important;
 }
 
 .Category-grid .item {
-  flex: 0 1 108px;
+  flex: 0 0 auto;
+  width: auto;
   border: none !important;
   box-shadow: none !important;
-  padding: 8px 4px !important;
+  padding: 8px 10px !important;
   align-items: center;
   text-align: center !important;
 }
@@ -506,8 +528,8 @@ h2 {
 .Category-grid .item img {
   aspect-ratio: 1 / 1;
   border-radius: 50% !important;
-  width: 68px !important;
-  height: 68px !important;
+  width: 62px !important;
+  height: 62px !important;
   margin: 0 auto !important;
   border: 1px solid var(--nd-border);
 }
@@ -517,7 +539,9 @@ h2 {
   text-align: center !important;
   min-height: unset;
   -webkit-line-clamp: unset;
-  font-size: 12.5px !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  white-space: nowrap;
   margin-top: 6px !important;
 }
 
