@@ -374,6 +374,134 @@
   }
 
   /* ---------------------------------------------------------------- */
+  /* Autentikasi sederhana (localStorage) — supaya Masuk & Daftar     */
+  /* benar-benar berfungsi walau tanpa server backend.                */
+  /* ---------------------------------------------------------------- */
+  var USERS_KEY = "nd_users";
+  var SESSION_KEY = "nd_current_user";
+
+  function readUsers() {
+    try {
+      var raw = localStorage.getItem(USERS_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function writeUsers(users) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+
+  window.ndRegisterUser = function (data) {
+    var users = readUsers();
+    var usernameTaken = users.some(function (u) {
+      return u.username.toLowerCase() === data.username.toLowerCase();
+    });
+    var emailTaken = users.some(function (u) {
+      return u.email.toLowerCase() === data.email.toLowerCase();
+    });
+
+    if (usernameTaken) {
+      return { success: false, message: "Nama pengguna sudah dipakai. Coba nama lain." };
+    }
+    if (emailTaken) {
+      return { success: false, message: "Email sudah terdaftar. Coba masuk saja." };
+    }
+    if (data.password.length < 6) {
+      return { success: false, message: "Password minimal 6 karakter." };
+    }
+
+    users.push({
+      fullname: data.fullname,
+      email: data.email,
+      username: data.username,
+      password: data.password,
+      birthdate: data.birthdate || ""
+    });
+    writeUsers(users);
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ username: data.username, fullname: data.fullname }));
+    return { success: true, message: "Akun berhasil dibuat! Selamat datang, " + data.fullname + "." };
+  };
+
+  window.ndLoginUser = function (username, password) {
+    var users = readUsers();
+    var match = users.find(function (u) {
+      return (
+        (u.username.toLowerCase() === username.toLowerCase() ||
+          u.email.toLowerCase() === username.toLowerCase()) &&
+        u.password === password
+      );
+    });
+
+    if (!match) {
+      return { success: false, message: "Nama pengguna atau password salah." };
+    }
+
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ username: match.username, fullname: match.fullname }));
+    return { success: true, message: "Berhasil masuk. Selamat datang kembali, " + match.fullname + "!" };
+  };
+
+  window.ndLogoutUser = function () {
+    localStorage.removeItem(SESSION_KEY);
+    updateAuthNav();
+    showToast("Kamu telah keluar.", "info");
+  };
+
+  window.ndGetCurrentUser = function () {
+    try {
+      var raw = localStorage.getItem(SESSION_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  /* Perbarui link "Masuk" di navbar jadi nama pengguna bila sudah login,
+     dan konsisten di semua halaman (dulu ada yang "Login", "Sign in",
+     "Masuk", bahkan link mati "#"). */
+  function updateAuthNav() {
+    var links = document.querySelectorAll(".right-menu > li > a, .nd-mobile-signin-item a");
+    var user = window.ndGetCurrentUser();
+
+    links.forEach(function (link) {
+      if (user) {
+        link.textContent = "Halo, " + user.fullname.split(" ")[0];
+        link.href = "#";
+        link.onclick = function (e) {
+          e.preventDefault();
+          if (confirm("Keluar dari akun " + user.fullname + "?")) {
+            window.ndLogoutUser();
+          }
+        };
+      } else {
+        link.textContent = "Masuk";
+        link.href = BASE + "sign in.html";
+        link.onclick = null;
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Dekorasi latar sakura — dahan bunga sakura melayang ke kanan,    */
+  /* muncul otomatis di semua halaman.                                */
+  /* ---------------------------------------------------------------- */
+  function setupSakuraDecoration() {
+    if (document.querySelector(".nd-sakura-layer")) return;
+    var layer = document.createElement("div");
+    layer.className = "nd-sakura-layer";
+    layer.setAttribute("aria-hidden", "true");
+    [1, 2, 3].forEach(function (i) {
+      var img = document.createElement("img");
+      img.className = "nd-sakura-branch nd-sk-" + i;
+      img.src = BASE + "images/sakura-branch.png";
+      img.alt = "";
+      layer.appendChild(img);
+    });
+    document.body.insertBefore(layer, document.body.firstChild);
+  }
+
+  /* ---------------------------------------------------------------- */
   /* Ensure basket icon always links to Keranjang.html                */
   /* ---------------------------------------------------------------- */
   function ensureBasketLink() {
@@ -391,9 +519,11 @@
   /* Init                                                              */
   /* ---------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
+    setupSakuraDecoration();
     ensureBasketLink();
     updateCartBadge();
     setupMobileMenu();
+    updateAuthNav();
     setupScrollEffects();
     setupRevealAnimation();
     setupCheckout();

@@ -3,166 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in</title>
+    <title>Daftar Akun - Nihon-Desu</title>
     <style>
-      /* Reset some basic styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
 
-/* Body styles */
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-   
-}
+      body {
+          font-family: 'Arial', sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: 40px 0;
+      }
 
-/* Login Container */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-}
+      .login-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          background-color: white;
+          gap: 40px;
+      }
 
-.login-form {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-}
+      .login-form {
+          background: #ffffff;
+          padding: 40px;
+          border-radius: 14px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 440px;
+          text-align: center;
+          animation: nd-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
 
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
+      h2 {
+          font-size: 24px;
+          margin-bottom: 24px;
+          color: #161616;
+      }
 
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
+      .input-group {
+          margin-bottom: 16px;
+          text-align: left;
+      }
 
-.input-group label {
-    font-size: 14px;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
-}
+      .input-group label {
+          font-size: 13.5px;
+          color: #555;
+          display: block;
+          margin-bottom: 5px;
+          font-weight: 500;
+      }
 
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-}
+      .input-group input {
+          width: 100%;
+          padding: 10px 12px;
+          border: 1.5px solid #ddd;
+          border-radius: 6px;
+          font-size: 15px;
+          background-color: #f9f9f9;
+          transition: all 0.2s ease;
+      }
 
-.input-group input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
+      .input-group input:focus {
+          border-color: #e4032c;
+          outline: none;
+          background: #fff;
+          box-shadow: 0 0 0 3px rgba(228, 3, 44, 0.1);
+      }
 
-button.btn {
-    width: 100%;
-    padding: 12px;
-    background-color: red;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button.btn:hover {
-    background-color: rgb(224, 0, 0);
-}
-
-.forgot-password {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.forgot-password a {
-    color: red;
-    text-decoration: none;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-    .login-form {
-        padding: 30px;
-    }
-    .header-form {
-        padding: 30px;
-    }
-}
-.garis-dengan-teks {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .garis-dengan-teks::before,
-        .garis-dengan-teks::after {
-            content: "";
-            flex: 1;
-            border-top: 2px solid #9c9999; /* Warna dan ketebalan garis */
-            margin: 0 10px; /* Memberi jarak antara teks dan garis */
-        }
-
-        .garis-dengan-teks span {
-            font-size: 16px;
-            font-weight: bold;
-            color: #817f7f; /* Warna teks */
-        }
-        button.btn1{
-            width: 100%;
-            padding: 12px;
-            background-color: #0165E1;
-            border: 100px #333;
-            stroke-width: 5%;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-      
       button.btn {
-          background: linear-gradient(135deg, #ff3d6e 0%, #6c4bff 100%) !important;
-          box-shadow: 0 6px 16px rgba(255, 61, 110, 0.3);
-          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          width: 100%;
+          padding: 12px;
+          background: #161616;
+          border: none;
+          border-radius: 6px;
+          color: white;
+          font-size: 15.5px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
       }
+
       button.btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 24px rgba(255, 61, 110, 0.45);
+          background: #e4032c;
       }
+
+      .form-message {
+          margin-bottom: 14px;
+          padding: 10px 12px;
+          border-radius: 6px;
+          font-size: 13.5px;
+          text-align: left;
+          display: none;
+      }
+
+      .form-message.nd-show {
+          display: block;
+      }
+
+      .form-message.nd-error {
+          background: #fdeaea;
+          color: #b8021f;
+          border: 1px solid #f6c7c7;
+      }
+
+      .form-message.nd-success {
+          background: #eafaf0;
+          color: #1a7a3c;
+          border: 1px solid #b8ecc9;
+      }
+
+      .forgot-password {
+          margin-top: 16px;
+          font-size: 13.5px;
+          color: #555;
+      }
+
+      .forgot-password a {
+          color: #e4032c;
+          text-decoration: none;
+          font-weight: 600;
+      }
+
+      .forgot-password a:hover {
+          text-decoration: underline;
+      }
+
+      .register-illustration {
+          display: none;
+      }
+
+      @keyframes nd-fade-up {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
       .nd-back-home {
           position: fixed;
           top: 20px;
           left: 20px;
           text-decoration: none;
-          color: #6c4bff;
+          color: #161616;
           font-weight: 600;
           font-size: 14px;
+          z-index: 5;
+      }
+
+      .nd-back-home:hover {
+          color: #e4032c;
+      }
+
+      @media (min-width: 750px) {
+          .register-illustration {
+              display: block;
+          }
       }
     </style>
     <link rel="stylesheet" href="CSS/common.css" />
@@ -170,22 +169,17 @@ button.btn:hover {
 <body>
     <a class="nd-back-home" href="index.html">← Kembali ke Beranda</a>
     <div class="login-container">
-            <img src="images/20241208_211754.png" style="height: 500px;width: 500px;">
+        <img class="register-illustration" src="images/20241208_211754.png" style="height: 380px;width: 380px;" alt="Ilustrasi daftar">
         <div class="login-form">
-            <form action="#" method="post">
+            <form id="register-form" action="#" method="post">
                 <h2>DAFTAR</h2>
-                <button type="button" class="btn1" onclick="window.location.href='https://www.facebook.com/login.php?skip_api_login=1&api_key=997410520391321&kid_directed_site=0&app_id=997410520391321&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fv3.3%2Fdialog%2Foauth%3Fclient_id%3D997410520391321%26redirect_uri%3Dhttps%253A%252F%252Fkyou.id%252Fcallback%252Ffacebook%26scope%3Demail%26response_type%3Dcode%26auth_type%3Drerequest%26ret%3Dlogin%26fbapp_pres%3D0%26logger_id%3D19fc00a6-22cd-42c0-9651-69a78b585e73%26tp%3Dunspecified&cancel_url=https%3A%2F%2Fkyou.id%2Fcallback%2Ffacebook%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=page&locale=en_GB&pl_dbl=0'">
-                    <img src="images/facebook-logo-0.png" style="height: 30px;width: 30px;margin-top: -1%;margin-bottom: -2%;" > Daftar dengan Facebook </button>
-                <div class="garis-dengan-teks">
-                    <span>atau</span>
-                </div>
-                
+                <div class="form-message" id="register-message"></div>
                 <div class="input-group">
-                    <label for="username">Nama lengkap</label>
+                    <label for="fullname">Nama lengkap</label>
                     <input type="text" id="fullname" name="fullname" required>
                 </div>
                 <div class="input-group">
-                    <label for="Email">Email</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="input-group">
@@ -193,18 +187,51 @@ button.btn:hover {
                     <input type="text" id="username" name="username" required>
                 </div>
                 <div class="input-group">
-                    <label for="Password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6">
                 </div>
                 <div class="input-group">
                     <label for="date">Tanggal lahir</label>
                     <input type="date" id="date" name="date" required>
                 </div>
-                <button type="submit" class="btn">Masuk</button>
+                <button type="submit" class="btn">Daftar</button>
             </form>
-            <p class="forgot-password"><a href="#">Sudah punya akun ? klik disini</a></p>
+            <p class="forgot-password"><a href="sign in.html">Sudah punya akun? Masuk di sini</a></p>
         </div>
     </div>
 
+    <script src="JS/cart.js"></script>
+    <script>
+        (function () {
+            var form = document.getElementById("register-form");
+            var messageBox = document.getElementById("register-message");
+
+            function showMessage(text, type) {
+                messageBox.textContent = text;
+                messageBox.className = "form-message nd-show nd-" + type;
+            }
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var data = {
+                    fullname: document.getElementById("fullname").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    username: document.getElementById("username").value.trim(),
+                    password: document.getElementById("password").value,
+                    birthdate: document.getElementById("date").value
+                };
+
+                var result = window.ndRegisterUser(data);
+                if (result.success) {
+                    showMessage(result.message, "success");
+                    setTimeout(function () {
+                        window.location.href = "index.html";
+                    }, 900);
+                } else {
+                    showMessage(result.message, "error");
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

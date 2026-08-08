@@ -3,190 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in</title>
+    <title>Masuk - Nihon-Desu</title>
     <style>
-      /* Reset some basic styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body styles */
-body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-   
-}
-
-/* Login Container */
-.signin-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-}
-
-.signin-form {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    font-size: 14px;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-}
-
-.input-group input:focus {
-    border-color: red;
-    outline: none;
-}
-
-button.btn {
-    width: 100%;
-    padding: 12px;
-    background-color: red;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button.btn:hover {
-    background-color: rgb(224, 0, 0);
-}
-
-.forgot-password {
-    margin-top: 10px;
-    font-size: 14px;
-    margin-bottom: 5%;
-    text-align: right;
-
-}
-
-.forgot-password a {
-    color: red;
-    text-decoration: none;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-.gakpunya {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.gakpunya a {
-    color: red;
-    text-decoration: none;
-    
-}
-
-.gakpunya a:hover {
-    text-decoration: underline;
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-    .login-form {
-        padding: 30px;
-    }
-    .header-form {
-        padding: 30px;
-    }
-}
-.garis-dengan-teks {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .garis-dengan-teks::before,
-        .garis-dengan-teks::after {
-            content: "";
-            flex: 1;
-            border-top: 2px solid #9c9999; /* Warna dan ketebalan garis */
-            margin: 0 10px; /* Memberi jarak antara teks dan garis */
-        }
-
-        .garis-dengan-teks span {
-            font-size: 16px;
-            font-weight: bold;
-            color: #817f7f; /* Warna teks */
-        }
-        button.btn1{
-            width: 100%;
-            padding: 12px;
-            background-color: #0165E1;
-            border: 100px #333;
-            stroke-width: 5%;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-      
-      button.btn {
-          background: linear-gradient(135deg, #ff3d6e 0%, #6c4bff 100%);
-          box-shadow: 0 6px 16px rgba(255, 61, 110, 0.3);
-          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
       }
-      button.btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 24px rgba(255, 61, 110, 0.45);
+
+      body {
+          font-family: 'Arial', sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
       }
+
+      .signin-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          gap: 40px;
+      }
+
       .signin-form {
+          background: #ffffff;
+          padding: 40px;
+          border-radius: 14px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 420px;
+          text-align: center;
           animation: nd-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       }
+
+      h2 {
+          font-size: 24px;
+          margin-bottom: 24px;
+          color: #161616;
+      }
+
+      .input-group {
+          margin-bottom: 18px;
+          text-align: left;
+      }
+
+      .input-group label {
+          font-size: 13.5px;
+          color: #555;
+          display: block;
+          margin-bottom: 5px;
+          font-weight: 500;
+      }
+
+      .input-group input {
+          width: 100%;
+          padding: 10px 12px;
+          border: 1.5px solid #ddd;
+          border-radius: 6px;
+          font-size: 15px;
+          background-color: #f9f9f9;
+          transition: all 0.2s ease;
+      }
+
+      .input-group input:focus {
+          border-color: #e4032c;
+          outline: none;
+          background: #fff;
+          box-shadow: 0 0 0 3px rgba(228, 3, 44, 0.1);
+      }
+
+      button.btn {
+          width: 100%;
+          padding: 12px;
+          background: #161616;
+          border: none;
+          border-radius: 6px;
+          color: white;
+          font-size: 15.5px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+      }
+
+      button.btn:hover {
+          background: #e4032c;
+      }
+
+      .form-message {
+          margin-bottom: 14px;
+          padding: 10px 12px;
+          border-radius: 6px;
+          font-size: 13.5px;
+          text-align: left;
+          display: none;
+      }
+
+      .form-message.nd-show {
+          display: block;
+      }
+
+      .form-message.nd-error {
+          background: #fdeaea;
+          color: #b8021f;
+          border: 1px solid #f6c7c7;
+      }
+
+      .form-message.nd-success {
+          background: #eafaf0;
+          color: #1a7a3c;
+          border: 1px solid #b8ecc9;
+      }
+
+      .forgot-password {
+          margin-top: 12px;
+          font-size: 13.5px;
+          text-align: right;
+      }
+
+      .forgot-password a {
+          color: #e4032c;
+          text-decoration: none;
+      }
+
+      .forgot-password a:hover {
+          text-decoration: underline;
+      }
+
+      .gakpunya {
+          margin-top: 18px;
+          font-size: 13.5px;
+          color: #555;
+      }
+
+      .gakpunya a {
+          color: #e4032c;
+          text-decoration: none;
+          font-weight: 600;
+      }
+
+      .gakpunya a:hover {
+          text-decoration: underline;
+      }
+
+      .signin-illustration {
+          display: none;
+      }
+
       @keyframes nd-fade-up {
           from { opacity: 0; transform: translateY(16px); }
           to { opacity: 1; transform: translateY(0); }
       }
+
       .nd-back-home {
           position: fixed;
           top: 20px;
           left: 20px;
           text-decoration: none;
-          color: #6c4bff;
+          color: #161616;
           font-weight: 600;
           font-size: 14px;
+          z-index: 5;
+      }
+
+      .nd-back-home:hover {
+          color: #e4032c;
+      }
+
+      @media (min-width: 700px) {
+          .signin-illustration {
+              display: block;
+          }
       }
     </style>
     <link rel="stylesheet" href="CSS/common.css" />
@@ -194,31 +184,53 @@ button.btn:hover {
 <body>
     <a class="nd-back-home" href="index.html">← Kembali ke Beranda</a>
     <div class="signin-container">
-            <img src="images/Sign in.png" style="height: 400px;width: 400px;">
+        <img class="signin-illustration" src="images/Sign in.png" style="height: 380px;width: 380px;" alt="Ilustrasi masuk">
         <div class="signin-form">
-            <form action="#" method="post">
+            <form id="signin-form" action="#" method="post">
                 <h2>MASUK</h2>
-                <button type="button" class="btn1" onclick="window.location.href='https://www.facebook.com/login.php?skip_api_login=1&api_key=997410520391321&kid_directed_site=0&app_id=997410520391321&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fv3.3%2Fdialog%2Foauth%3Fclient_id%3D997410520391321%26redirect_uri%3Dhttps%253A%252F%252Fkyou.id%252Fcallback%252Ffacebook%26scope%3Demail%26response_type%3Dcode%26auth_type%3Drerequest%26ret%3Dlogin%26fbapp_pres%3D0%26logger_id%3D19fc00a6-22cd-42c0-9651-69a78b585e73%26tp%3Dunspecified&cancel_url=https%3A%2F%2Fkyou.id%2Fcallback%2Ffacebook%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=page&locale=en_GB&pl_dbl=0'">
-                    <img src="images/facebook-logo-0.png" style="height: 30px;width: 30px;margin-top: -1%;margin-bottom: -2%;" > Masuk dengan Facebook </button>
-                <div class="garis-dengan-teks">
-                    <span>atau</span>
-                </div>
-                
-                
+                <div class="form-message" id="signin-message"></div>
                 <div class="input-group">
-                    <label for="username">Nama pengguna</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="username">Nama pengguna atau Email</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
                 </div>
                 <div class="input-group">
-                    <label for="Password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
                 </div>
                 <p class="forgot-password"><a href="#">Lupa password ?</a></p>
-                <button type="submit" class="btn" >Masuk</button>
+                <button type="submit" class="btn">Masuk</button>
             </form>
-            <p class="gakpunya" ><a href="#" onclick="window.location.href='register.html'">Tidak punya akun ? klik disini</a></p>
+            <p class="gakpunya"><a href="register.html">Belum punya akun? Daftar di sini</a></p>
         </div>
     </div>
 
+    <script src="JS/cart.js"></script>
+    <script>
+        (function () {
+            var form = document.getElementById("signin-form");
+            var messageBox = document.getElementById("signin-message");
+
+            function showMessage(text, type) {
+                messageBox.textContent = text;
+                messageBox.className = "form-message nd-show nd-" + type;
+            }
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var username = document.getElementById("username").value.trim();
+                var password = document.getElementById("password").value;
+
+                var result = window.ndLoginUser(username, password);
+                if (result.success) {
+                    showMessage(result.message, "success");
+                    setTimeout(function () {
+                        window.location.href = "index.html";
+                    }, 900);
+                } else {
+                    showMessage(result.message, "error");
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -55,6 +55,7 @@ nav {
   border-bottom: 1px solid var(--nd-border);
   box-shadow: none;
   transition: var(--nd-transition);
+  z-index: 30;
 }
 
 nav.nd-scrolled {
@@ -856,4 +857,91 @@ h2 {
 
   .cart-item { flex-wrap: wrap; }
   .slideshow-container { aspect-ratio: 16 / 9; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* SAKURA DRIFT — dekorasi latar belakang di semua halaman, dahan sakura  */
+/* melayang perlahan ke kanan, di belakang konten & tidak bisa diklik.    */
+/* ---------------------------------------------------------------------- */
+.nd-sakura-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nd-sakura-branch {
+  position: absolute;
+  opacity: 0.1;
+  filter: grayscale(1);
+  animation-name: nd-sakura-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.nd-sakura-branch.nd-sk-1 {
+  top: 6%;
+  left: -30%;
+  width: 340px;
+  animation-duration: 55s;
+}
+
+.nd-sakura-branch.nd-sk-2 {
+  top: 55%;
+  left: -40%;
+  width: 260px;
+  opacity: 0.07;
+  transform: scaleY(-1) rotate(6deg);
+  animation-duration: 70s;
+  animation-delay: -20s;
+}
+
+.nd-sakura-branch.nd-sk-3 {
+  top: 82%;
+  left: -25%;
+  width: 200px;
+  opacity: 0.06;
+  animation-duration: 46s;
+  animation-delay: -8s;
+}
+
+@keyframes nd-sakura-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(160vw); }
+}
+
+.nd-sakura-branch.nd-sk-2 {
+  animation-name: nd-sakura-drift-flip;
+}
+
+@keyframes nd-sakura-drift-flip {
+  from { transform: scaleY(-1) rotate(6deg) translateX(0); }
+  to { transform: scaleY(-1) rotate(6deg) translateX(160vw); }
+}
+
+/* Pastikan navbar tetap tampil di atas lapisan dekorasi saat sticky */
+
+@media (prefers-reduced-motion: reduce) {
+  .nd-sakura-branch {
+    animation: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .nd-sakura-branch.nd-sk-1 { width: 220px; }
+  .nd-sakura-branch.nd-sk-2 { width: 170px; }
+  .nd-sakura-branch.nd-sk-3 { width: 140px; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* HALAMAN INFO (Tentang, Pembuat, Care, Syarat, Privasi) — teks rata kiri */
+/* ---------------------------------------------------------------------- */
+.nd-info-card h1,
+.nd-info-card h2,
+.nd-info-card p,
+.nd-faq-item h2,
+.nd-faq-item p {
+  text-align: left !important;
 }
