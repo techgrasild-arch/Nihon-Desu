@@ -546,16 +546,27 @@ h2 {
   margin-top: 6px !important;
 }
 
-/* Fade-in-up animation applied via JS (IntersectionObserver) */
+/* Fade-in-up animation applied via JS (IntersectionObserver) — dipakai di
+   semua halaman: kartu produk, kartu info, item FAQ, item keranjang, dst. */
 .nd-reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--nd-reveal-delay, 0s);
 }
 
 .nd-reveal.nd-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nd-reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---------------------------------------------------------------------- */

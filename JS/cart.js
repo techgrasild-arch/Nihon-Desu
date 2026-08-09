@@ -306,12 +306,24 @@
   /* ---------------------------------------------------------------- */
   function setupRevealAnimation() {
     var targets = document.querySelectorAll(
-      ".item, .trending-item, .Category-container .item"
+      [
+        ".item",
+        ".trending-item",
+        ".cart-item",
+        ".nd-info-card",
+        ".nd-maker-card",
+        ".nd-faq-item",
+        ".F-Column",
+        ".product-container",
+        ".Category-grid .item"
+      ].join(", ")
     );
     if (!targets.length) return;
 
-    targets.forEach(function (el) {
+    targets.forEach(function (el, i) {
       el.classList.add("nd-reveal");
+      // stagger halus per elemen dalam grid yang sama (maks 300ms)
+      el.style.setProperty("--nd-reveal-delay", Math.min(i % 10, 6) * 0.05 + "s");
     });
 
     if (!("IntersectionObserver" in window)) {
@@ -330,7 +342,7 @@
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
 
     targets.forEach(function (el) {
