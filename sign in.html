@@ -13,115 +13,262 @@
 
       body {
           font-family: 'Arial', sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
+          min-height: 100vh;
+          overflow-x: hidden;
       }
 
-      .signin-container {
+      .auth-page {
           display: flex;
-          justify-content: center;
+          min-height: 100vh;
+      }
+
+      /* ---------------- Panel kiri: bermerek & beranimasi ---------------- */
+      .auth-brand {
+          position: relative;
+          flex: 1 1 46%;
+          background: linear-gradient(135deg, #161616 0%, #2a0a10 45%, #e4032c 130%);
+          background-size: 220% 220%;
+          animation: nd-gradient-shift 12s ease infinite;
+          display: flex;
+          flex-direction: column;
           align-items: center;
-          width: 100%;
-          height: 100%;
-          background-color: white;
-          gap: 40px;
+          justify-content: center;
+          overflow: hidden;
+          min-height: 100vh;
+      }
+
+      @keyframes nd-gradient-shift {
+          0% { background-position: 0% 30%; }
+          50% { background-position: 100% 70%; }
+          100% { background-position: 0% 30%; }
+      }
+
+      .auth-brand::before,
+      .auth-brand::after {
+          content: "";
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 70%);
+          animation: nd-float 9s ease-in-out infinite;
+      }
+
+      .auth-brand::before {
+          width: 340px;
+          height: 340px;
+          top: -80px;
+          left: -80px;
+          animation-delay: 0s;
+      }
+
+      .auth-brand::after {
+          width: 260px;
+          height: 260px;
+          bottom: -60px;
+          right: -60px;
+          animation-delay: 2.5s;
+      }
+
+      @keyframes nd-float {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(20px, -24px) scale(1.08); }
+      }
+
+      .auth-petal {
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          background: rgba(255, 255, 255, 0.55);
+          border-radius: 70% 0 70% 0;
+          animation: nd-petal-fall linear infinite;
+          opacity: 0;
+      }
+
+      @keyframes nd-petal-fall {
+          0% {
+              opacity: 0;
+              transform: translateY(-40px) translateX(0) rotate(0deg);
+          }
+          10% { opacity: 0.85; }
+          90% { opacity: 0.6; }
+          100% {
+              opacity: 0;
+              transform: translateY(640px) translateX(60px) rotate(300deg);
+          }
+      }
+
+      .auth-brand-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          color: #fff;
+          padding: 40px;
+          animation: nd-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .auth-logo-mark {
+          width: 88px;
+          height: 88px;
+          border-radius: 50%;
+          background: #fff;
+          color: #e4032c;
+          font-weight: 800;
+          font-size: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 22px;
+          box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+          animation: nd-pulse-in 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      @keyframes nd-pulse-in {
+          0% { transform: scale(0.5); opacity: 0; }
+          60% { transform: scale(1.08); opacity: 1; }
+          100% { transform: scale(1); }
+      }
+
+      .auth-brand-content h1 {
+          font-size: 30px;
+          font-weight: 800;
+          margin-bottom: 10px;
+          letter-spacing: 0.5px;
+      }
+
+      .auth-brand-content p {
+          font-size: 14.5px;
+          color: rgba(255,255,255,0.8);
+          max-width: 320px;
+          margin: 0 auto;
+          line-height: 1.7;
+      }
+
+      .auth-brand-tagline {
+          margin-top: 34px;
+          display: inline-flex;
+          gap: 8px;
+          font-size: 12.5px;
+          color: rgba(255,255,255,0.65);
+          letter-spacing: 2px;
+          text-transform: uppercase;
+      }
+
+      /* ---------------- Panel kanan: form ---------------- */
+      .auth-form-panel {
+          flex: 1 1 54%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 24px;
+          position: relative;
+      }
+
+      .nd-back-home {
+          position: absolute;
+          top: 24px;
+          right: 32px;
+          text-decoration: none;
+          color: #888;
+          font-weight: 600;
+          font-size: 13.5px;
+          transition: color 0.2s ease;
+      }
+
+      .nd-back-home:hover {
+          color: #e4032c;
       }
 
       .signin-form {
-          background: #ffffff;
-          padding: 40px;
-          border-radius: 14px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
           width: 100%;
-          max-width: 420px;
-          text-align: center;
-          animation: nd-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          max-width: 380px;
+          animation: nd-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      h2 {
-          font-size: 24px;
-          margin-bottom: 24px;
+      @keyframes nd-fade-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      .signin-form h2 {
+          font-size: 26px;
+          font-weight: 800;
           color: #161616;
+          margin-bottom: 6px;
       }
 
-      .input-group {
-          margin-bottom: 18px;
-          text-align: left;
-      }
-
-      .input-group label {
+      .signin-form .auth-subtitle {
           font-size: 13.5px;
-          color: #555;
-          display: block;
-          margin-bottom: 5px;
-          font-weight: 500;
+          color: #888;
+          margin-bottom: 28px;
       }
 
-      .input-group input {
+      /* Floating label input */
+      .nd-field {
+          position: relative;
+          margin-bottom: 22px;
+          opacity: 0;
+          animation: nd-field-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .nd-field:nth-of-type(1) { animation-delay: 0.05s; }
+      .nd-field:nth-of-type(2) { animation-delay: 0.12s; }
+
+      @keyframes nd-field-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+      .nd-field input {
           width: 100%;
-          padding: 10px 12px;
-          border: 1.5px solid #ddd;
-          border-radius: 6px;
+          padding: 16px 14px 8px;
+          border: 1.5px solid #e2e2e2;
+          border-radius: 8px;
           font-size: 15px;
-          background-color: #f9f9f9;
-          transition: all 0.2s ease;
+          background: #fafafa;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
       }
 
-      .input-group input:focus {
-          border-color: #e4032c;
+      .nd-field label {
+          position: absolute;
+          left: 15px;
+          top: 16px;
+          font-size: 15px;
+          color: #999;
+          pointer-events: none;
+          transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .nd-field input:focus {
           outline: none;
+          border-color: #e4032c;
           background: #fff;
-          box-shadow: 0 0 0 3px rgba(228, 3, 44, 0.1);
+          box-shadow: 0 0 0 4px rgba(228, 3, 44, 0.1);
       }
 
-      button.btn {
-          width: 100%;
-          padding: 12px;
-          background: #161616;
-          border: none;
-          border-radius: 6px;
-          color: white;
-          font-size: 15.5px;
+      .nd-field input:focus + label,
+      .nd-field input:not(:placeholder-shown) + label {
+          top: 6px;
+          font-size: 11px;
+          color: #e4032c;
           font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s ease;
-      }
-
-      button.btn:hover {
-          background: #e4032c;
       }
 
       .form-message {
-          margin-bottom: 14px;
-          padding: 10px 12px;
-          border-radius: 6px;
+          margin-bottom: 16px;
+          padding: 11px 13px;
+          border-radius: 8px;
           font-size: 13.5px;
-          text-align: left;
           display: none;
+          animation: nd-field-in 0.3s ease forwards;
       }
 
-      .form-message.nd-show {
-          display: block;
-      }
-
-      .form-message.nd-error {
-          background: #fdeaea;
-          color: #b8021f;
-          border: 1px solid #f6c7c7;
-      }
-
-      .form-message.nd-success {
-          background: #eafaf0;
-          color: #1a7a3c;
-          border: 1px solid #b8ecc9;
-      }
+      .form-message.nd-show { display: block; }
+      .form-message.nd-error { background: #fdeaea; color: #b8021f; border: 1px solid #f6c7c7; }
+      .form-message.nd-success { background: #eafaf0; color: #1a7a3c; border: 1px solid #b8ecc9; }
 
       .forgot-password {
-          margin-top: 12px;
-          font-size: 13.5px;
           text-align: right;
+          margin-bottom: 18px;
+          font-size: 13px;
       }
 
       .forgot-password a {
@@ -129,84 +276,135 @@
           text-decoration: none;
       }
 
-      .forgot-password a:hover {
-          text-decoration: underline;
+      .forgot-password a:hover { text-decoration: underline; }
+
+      /* Tombol dengan efek ripple */
+      button.btn {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          padding: 14px;
+          background: #161616;
+          border: none;
+          border-radius: 8px;
+          color: white;
+          font-size: 15.5px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: transform 0.15s ease, background 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      button.btn:hover {
+          background: #e4032c;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 22px rgba(228, 3, 44, 0.3);
+      }
+
+      button.btn:active {
+          transform: translateY(0) scale(0.98);
+      }
+
+      .nd-ripple {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.5);
+          transform: scale(0);
+          animation: nd-ripple-anim 0.6s ease-out;
+          pointer-events: none;
+      }
+
+      @keyframes nd-ripple-anim {
+          to { transform: scale(3); opacity: 0; }
       }
 
       .gakpunya {
-          margin-top: 18px;
+          margin-top: 20px;
           font-size: 13.5px;
           color: #555;
+          text-align: center;
       }
 
       .gakpunya a {
           color: #e4032c;
           text-decoration: none;
-          font-weight: 600;
+          font-weight: 700;
       }
 
-      .gakpunya a:hover {
-          text-decoration: underline;
-      }
+      .gakpunya a:hover { text-decoration: underline; }
 
-      .signin-illustration {
-          display: none;
-      }
-
-      @keyframes nd-fade-up {
-          from { opacity: 0; transform: translateY(16px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
-
-      .nd-back-home {
-          position: fixed;
-          top: 20px;
-          left: 20px;
-          text-decoration: none;
-          color: #161616;
-          font-weight: 600;
-          font-size: 14px;
-          z-index: 5;
-      }
-
-      .nd-back-home:hover {
-          color: #e4032c;
-      }
-
-      @media (min-width: 700px) {
-          .signin-illustration {
-              display: block;
-          }
+      @media (max-width: 860px) {
+          .auth-brand { display: none; }
+          .auth-form-panel { flex: 1 1 100%; }
       }
     </style>
     <link rel="stylesheet" href="CSS/common.css" />
 </head>
 <body>
-    <a class="nd-back-home" href="index.html">← Kembali ke Beranda</a>
-    <div class="signin-container">
-        <img class="signin-illustration" src="images/Sign in.png" style="height: 380px;width: 380px;" alt="Ilustrasi masuk">
-        <div class="signin-form">
-            <form id="signin-form" action="#" method="post">
-                <h2>MASUK</h2>
-                <div class="form-message" id="signin-message"></div>
-                <div class="input-group">
-                    <label for="username">Nama pengguna atau Email</label>
-                    <input type="text" id="username" name="username" required autocomplete="username">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required autocomplete="current-password">
-                </div>
-                <p class="forgot-password"><a href="#">Lupa password ?</a></p>
-                <button type="submit" class="btn">Masuk</button>
-            </form>
-            <p class="gakpunya"><a href="register.html">Belum punya akun? Daftar di sini</a></p>
+    <div class="auth-page">
+        <div class="auth-brand" id="auth-brand">
+            <div class="auth-brand-content">
+                <div class="auth-logo-mark">日</div>
+                <h1>Nihon-Desu</h1>
+                <p>Masuk untuk melanjutkan belanja figure, model kit, dan koleksi favoritmu.</p>
+                <div class="auth-brand-tagline">✿ 日本 です ✿</div>
+            </div>
+        </div>
+
+        <div class="auth-form-panel">
+            <a class="nd-back-home" href="index.html">← Kembali ke Beranda</a>
+            <div class="signin-form">
+                <form id="signin-form" action="#" method="post">
+                    <h2>Selamat Datang</h2>
+                    <p class="auth-subtitle">Masuk ke akun Nihon-Desu kamu</p>
+                    <div class="form-message" id="signin-message"></div>
+
+                    <div class="nd-field">
+                        <input type="text" id="username" name="username" placeholder=" " required autocomplete="username">
+                        <label for="username">Nama pengguna atau Email</label>
+                    </div>
+                    <div class="nd-field">
+                        <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <p class="forgot-password"><a href="#">Lupa password?</a></p>
+                    <button type="submit" class="btn">Masuk</button>
+                </form>
+                <p class="gakpunya">Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+            </div>
         </div>
     </div>
 
     <script src="JS/cart.js"></script>
     <script>
         (function () {
+            // Kelopak sakura melayang di panel kiri
+            var brand = document.getElementById("auth-brand");
+            for (var i = 0; i < 14; i++) {
+                var petal = document.createElement("span");
+                petal.className = "auth-petal";
+                petal.style.left = Math.random() * 100 + "%";
+                petal.style.animationDuration = (6 + Math.random() * 6) + "s";
+                petal.style.animationDelay = (Math.random() * 8) + "s";
+                petal.style.width = petal.style.height = (8 + Math.random() * 10) + "px";
+                brand.appendChild(petal);
+            }
+
+            // Efek ripple pada tombol submit
+            document.querySelectorAll("button.btn").forEach(function (btn) {
+                btn.addEventListener("click", function (e) {
+                    var rect = btn.getBoundingClientRect();
+                    var ripple = document.createElement("span");
+                    var size = Math.max(rect.width, rect.height);
+                    ripple.className = "nd-ripple";
+                    ripple.style.width = ripple.style.height = size + "px";
+                    ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+                    ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+                    btn.appendChild(ripple);
+                    setTimeout(function () { ripple.remove(); }, 650);
+                });
+            });
+
             var form = document.getElementById("signin-form");
             var messageBox = document.getElementById("signin-message");
 
