@@ -956,3 +956,95 @@ h2 {
 .nd-faq-item p {
   text-align: left !important;
 }
+
+/* ---------------------------------------------------------------------- */
+/* KELOPAK SAKURA JATUH — gaya sama seperti halaman Masuk/Daftar,          */
+/* dipakai di semua halaman supaya terasa senada & sama-sama smooth.       */
+/* ---------------------------------------------------------------------- */
+.nd-petal-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nd-falling-petal {
+  position: absolute;
+  top: -20px;
+  background: rgba(228, 3, 44, 0.38);
+  border-radius: 70% 0 70% 0;
+  animation: nd-petal-fall-page linear infinite;
+  opacity: 0;
+  box-shadow: 0 0 6px rgba(228, 3, 44, 0.15);
+}
+
+@keyframes nd-petal-fall-page {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) translateX(0) rotate(0deg);
+  }
+  8% { opacity: 1; }
+  92% { opacity: 0.7; }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) translateX(70px) rotate(320deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nd-falling-petal { animation: none; opacity: 0; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* RIPPLE — efek gelombang saat tombol diklik, sama seperti tombol         */
+/* Masuk/Daftar, sekarang dipakai di semua tombol utama situs.             */
+/* ---------------------------------------------------------------------- */
+.btn-buy,
+.checkout-btn,
+.btn-cart,
+.nd-add-cart,
+.search-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.nd-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0);
+  animation: nd-ripple-anim 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes nd-ripple-anim {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* Transisi hover lebih smooth & konsisten dgn halaman Masuk/Daftar */
+.item,
+.trending-item,
+.nd-add-cart,
+.btn-buy,
+.checkout-btn,
+.btn-cart,
+.Category-grid .item img {
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Logo navbar: sentuhan gradient halus mengikuti aksen di halaman Masuk/Daftar */
+.logo a {
+  display: inline-flex;
+}
+
+.logo img {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.logo a:hover img {
+  transform: scale(1.05) rotate(-2deg);
+}

@@ -513,6 +513,55 @@
     document.body.insertBefore(layer, document.body.firstChild);
   }
 
+  /* Kelopak jatuh — gaya sama seperti halaman Masuk/Daftar, dipakai di
+     seluruh halaman supaya nuansanya senada dan sama-sama smooth. */
+  function setupFallingPetals() {
+    if (document.querySelector(".nd-petal-layer")) return;
+    var layer = document.createElement("div");
+    layer.className = "nd-petal-layer";
+    layer.setAttribute("aria-hidden", "true");
+    var count = window.innerWidth < 700 ? 10 : 18;
+    for (var i = 0; i < count; i++) {
+      var petal = document.createElement("span");
+      petal.className = "nd-falling-petal";
+      var size = 7 + Math.random() * 9;
+      petal.style.left = Math.random() * 100 + "%";
+      petal.style.width = size + "px";
+      petal.style.height = size + "px";
+      petal.style.animationDuration = 9 + Math.random() * 10 + "s";
+      petal.style.animationDelay = i < 6 ? Math.random() * 2 + "s" : Math.random() * 12 + "s";
+      layer.appendChild(petal);
+    }
+    document.body.insertBefore(layer, document.body.firstChild);
+  }
+
+  /* Efek ripple pada tombol utama, sama seperti tombol Masuk/Daftar.
+     Pakai capture:true supaya tetap jalan meski tombol (mis. nd-add-cart)
+     memanggil event.stopPropagation() pada fase bubbling. */
+  function setupRippleButtons() {
+    document.addEventListener(
+      "click",
+      function (e) {
+        var btn = e.target.closest(
+          ".btn-buy, .checkout-btn, .btn-cart, .nd-add-cart, .search-button"
+        );
+        if (!btn) return;
+        var rect = btn.getBoundingClientRect();
+        var size = Math.max(rect.width, rect.height);
+        var ripple = document.createElement("span");
+        ripple.className = "nd-ripple";
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = e.clientX - rect.left - size / 2 + "px";
+        ripple.style.top = e.clientY - rect.top - size / 2 + "px";
+        btn.appendChild(ripple);
+        setTimeout(function () {
+          ripple.remove();
+        }, 650);
+      },
+      true
+    );
+  }
+
   /* ---------------------------------------------------------------- */
   /* Ensure basket icon always links to Keranjang.html                */
   /* ---------------------------------------------------------------- */
@@ -532,6 +581,8 @@
   /* ---------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
     setupSakuraDecoration();
+    setupFallingPetals();
+    setupRippleButtons();
     ensureBasketLink();
     updateCartBadge();
     setupMobileMenu();
